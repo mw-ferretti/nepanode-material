@@ -1,0 +1,66 @@
+<md-content class="md-padding main-content" layout="row" style="background-color: #F0F0F0;" flex>
+    <div flex></div>        
+    <div flex="80">
+        <div layout="column" layout-align="top center" 
+         class="md-whiteframe-z4" 
+         style="background-color: white;">
+        <md-list>
+            <md-subheader class="md-no-sticky">  
+                <div layout="row" layout-align="space-between center">                    
+                    <span>Total: {{npService.page.meta.total_count}}</span>
+                    <section layout="row" layout-sm="row" layout-align="center center" ng-if="npService.page.length > 1">
+                        <span>
+                            <md-button class="md-icon-button md-primary" 
+                                       style="z-index: 1;"
+                                       ng-click="npService.page.previous()" aria-label="Settings"
+                                       ng-disabled="!npService.page.meta.previous">
+                                <ng-md-icon 
+                                            icon="keyboard_arrow_left"
+                                            style="fill: #259b24;"
+                                            size="36" 
+                                            options='{"rotation": "counterclock"}'>
+                                </ng-md-icon>
+                            </md-button>
+                        </span>
+                        <span>
+                            {{npService.page.index}}/{{npService.page.length}}
+                        </span>
+                        <span>
+                            <md-button class="md-icon-button md-primary" 
+                                       style="z-index: 1;"
+                                       ng-click="npService.page.next()" aria-label="Settings"
+                                       ng-disabled="!npService.page.meta.next">
+                                <ng-md-icon 
+                                            icon="keyboard_arrow_right"
+                                            style="fill: #259b24;"
+                                            size="36" 
+                                            options='{"rotation": "counterclock"}'>
+                                </ng-md-icon>
+                            </md-button>                            
+                        </span>
+                    </section>
+                </div>  
+                <div layout="row" layout-align="center center" style="height: 5px;"> 
+                    <md-progress-linear md-mode="indeterminate" ng-if="npService.working"></md-progress-linear>
+                </div>
+            </md-subheader>
+            <md-divider inset></md-divider>
+            <md-list-item ng-hide="npService.page.objects.length">
+                <div class="md-list-item-text"><h4>Is Empty</h4></div>
+            </md-list-item>
+            <md-list-item class="md-3-line" ng-repeat="layer in npService.page.objects">
+                <div style="margin: 10px;">
+                    <img ng-src="{{layer.thumbnail_url}}" alt="{{layer.title}}" style="width:200px;"  />  
+                </div>
+                <div class="md-list-item-text" layout="column" style="margin-left: 5px;">
+                  <h3>{{layer.title}}</h3>
+                  <h4>{{layer.category__gn_description}}</h4>
+                  <p>{{layer.abstract}}</p>
+                </div>
+                <md-divider inset></md-divider>
+            </md-list-item>
+        </md-list>
+            </div>
+    </div>
+    <div flex></div>
+</md-content>
